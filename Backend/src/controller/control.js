@@ -1,4 +1,4 @@
-const LibSch = require("../models/schema");
+const LibSch = require("../Models/schema.book");
 module.exports = {
   // GET ALL
   GetAll: async (req, res) => {

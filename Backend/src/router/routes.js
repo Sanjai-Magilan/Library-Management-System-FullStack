@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controll = require("../controller/control");
-const validate = require("../Middlewares/validate");
+const validate = require("../Middlewares/validate.book");
 
 router.get("/", controll.GetAll);
 router.get("/get/name/:name", controll.GetByName);
