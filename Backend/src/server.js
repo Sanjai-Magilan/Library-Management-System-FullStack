@@ -1,0 +1,10 @@
+const express = require("express");
+require("dotenv").config();
+PORT = process.env.PORT;
+const app = express();
+const ConnectDb = require("./database/db");
+ConnectDb();
+const router = require("./router/routes");
+app.use(express.json());
+app.use("/Lib", router);
+app.listen(PORT, () => console.log(`server started at port ${PORT}`));
