@@ -4,7 +4,7 @@ PORT = process.env.PORT;
 const app = express();
 const ConnectDb = require("./database/db");
 ConnectDb();
-const router = require("./router/routes");
+const router = require("./Router/routes");
 app.use(express.json());
 app.use("/Lib", router);
 app.listen(PORT, () => console.log(`server started at port ${PORT}`));

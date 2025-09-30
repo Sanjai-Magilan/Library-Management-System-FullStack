@@ -83,7 +83,7 @@ module.exports = {
   },
 
   //ADD BOOk
- AddBook: async (req, res) => {
+  AddBook: async (req, res) => {
     try {
       const lastbook = await LibSch.findOne().sort({ id: -1 });
       const nextId = lastbook ? lastbook.id + 1 : 1;
@@ -94,7 +94,6 @@ module.exports = {
       res.status(500).send({ error: error.message });
     }
   },
-
 
   // DELETE BY ID
   DeleteBook: async (req, res) => {
