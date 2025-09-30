@@ -84,28 +84,16 @@ module.exports = {
 
   //ADD BOOk
  AddBook: async (req, res) => {
-  try {
-    // req.body should be an array of books
-    if (!Array.isArray(req.body)) {
-      return res.status(400).send({ error: "Request body must be an array of books" });
+    try {
+      const lastbook = await LibSch.findOne().sort({ id: -1 });
+      const nextId = lastbook ? lastbook.id + 1 : 1;
+      const book = new LibSch({ ...req.body, id: nextId });
+      await book.save();
+      res.status(201).send(book);
+    } catch (error) {
+      res.status(500).send({ error: error.message });
     }
-
-    // Optional: auto-generate id if missing
-    const lastBook = await LibSch.findOne().sort({ id: -1 });
-    let nextId = lastBook ? lastBook.id + 1 : 1;
-
-    const booksToInsert = req.body.map(book => ({
-      ...book,
-      id: book.id || nextId++,
-      time: book.time || new Date(Date.now() + 5.5 * 60 * 60 * 1000) // IST offset
-    }));
-
-    const insertedBooks = await LibSch.insertMany(booksToInsert);
-    res.status(201).send(insertedBooks);
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-},
+  },
 
 
   // DELETE BY ID
