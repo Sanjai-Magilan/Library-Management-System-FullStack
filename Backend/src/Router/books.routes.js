@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controll = require("../controller/control");
+const controll = require("../Controller/control.book");
 const validate = require("../Middlewares/validate.book");
 
 router.get("/", controll.GetAll);

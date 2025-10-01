@@ -1,6 +1,6 @@
-const validateLibBook = require("../Validations/validation.book");
+const validateUser = require("../Validations/validation.user");
 const validate =(req,res,next)=>{
-    const {error}= validateLibBook(req.body);
+    const {error}= validateUser(req.body);
     if(error) return res.status(400).send("invalid formate");
     next();
 }
