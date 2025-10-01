@@ -9,7 +9,7 @@ const validateUser = (data) => {
     borrowedDate: Joi.date(),
     returnDate: Joi.date(),
   });
-
+  console.log(schema.validate(data));
   return schema.validate(data);
 };
 module.exports = validateUser;
