@@ -1,4 +1,5 @@
 const user = require("../Models/schema.user");
+const Book = require("../Models/schema.book");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -19,8 +20,7 @@ module.exports = {
     try {
       const UserData = req.body;
       const UserFound = await user.findOne({ MailId: UserData?.MailId });
-      if (!UserFound)  res.status(404).send("User not found");
-      console.log(UserFound.MailId);
+      if (!UserFound) res.status(404).send("User not found");
       if (await bcrypt.compare(UserData.Password, UserFound.Password)) {
         const auth = jwt.sign(
           { MailId: UserFound.MailId, UserRole: UserFound.UserRole },
@@ -31,6 +31,34 @@ module.exports = {
       } else {
         res.status(401).send("Incorrect password");
       }
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  },
+
+  BarrowBook: async (req, res) => {
+    try {
+      const today = new Date();
+      const borrowedDate = today.toISOString().split("T")[0];
+      const returnDate = new Date(today);
+      returnDate.setDate(returnDate.getDate() + 14);
+      const ReturnDate = returnDate.toISOString().split("T")[0];
+
+      const { name } = req.body;
+      const BookFound = await Book.findOne({ BookName });
+      if (!BookFound) return res.status(404).send("Book Not Found");
+      await user.findByIdAndUpdate(
+        { MailId: req.user.MailId }, // we find data by {data key in db : our search data}
+        { BorrowedBooks: name },
+        { borrowedDate: borrowedDate },
+        { returnDate: ReturnDate },
+        { new: true, runValidators: true }
+      );
+      await Book.findOneAndUpdate(
+        { name }, // Or just the key of the value what we need to find
+        { availability: false },
+        { new: true, runValidators: true }
+      );
     } catch (e) {
       res.status(500).send(e);
     }
