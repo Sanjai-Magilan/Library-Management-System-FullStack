@@ -37,7 +37,7 @@ module.exports = {
   },
 
   BarrowBook: async (req, res) => {
-    try { 
+    try {
       const today = new Date();
       const borrowedDate = today.toISOString().split("T")[0];
       const returnDate = new Date(today);
@@ -46,22 +46,25 @@ module.exports = {
 
       const { name } = req.body;
       const BookFound = await Book.findOne({ name });
-      
       if (!BookFound) return res.status(404).send("Book Not Found");
+      if (!BookFound.availability)
+        return res.status(409).send("Book not available");
       await user.findOneAndUpdate(
         { MailId: req.User.MailId }, // we find data by {data key in db : our search data}
-        { BorrowedBooks: name },
-        { borrowedDate: borrowedDate },
-        { returnDate: ReturnDate },
+        {
+          BorrowedBooks: name,
+          borrowedDate: borrowedDate,
+          returnDate: ReturnDate,
+        },
         { new: true, runValidators: true }
       );
-     
+
       await Book.findOneAndUpdate(
         { name }, // Or just the key of the value what we need to find
         { availability: false },
         { new: true, runValidators: true }
       );
-      res.status(200).send("Borrowed")
+      res.status(200).send("Borrowed");
     } catch (e) {
       res.status(500).send(e);
     }
