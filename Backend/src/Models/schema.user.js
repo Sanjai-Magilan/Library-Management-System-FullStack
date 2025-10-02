@@ -4,7 +4,7 @@ const UserSchema = new Schema({
   MailId: { type: String, required: true, unique: true },
   Username: { type: String, required: true, unique: true }, 
   Password: { type: String, required: true },
-  UserRoll: { type: String, enum: ["admin", "user", "guest"] },
+  UserRole: { type: String, enum: ["admin", "user", "guest"] },
   BorrowedBooks: { type: String },
   borrowedDate: { type: Date },
   returnDate: { type: Date },
