@@ -5,16 +5,16 @@ const auth = (req, res, next) => {
     const AuthenticationHeader = req.headers["authorization"];
     const Token = AuthenticationHeader && AuthenticationHeader.split(" ")[1];
     if (!Token) {
-      req.UserRole = "guest";
-      next();
+      req.User = { UserRole: "guest" };
+      return next();
     }
     jwt.verify(Token, process.env.ACCESS_TOKEN, (err, user) => {
-      if (err) res.Status(403).send("Invalid or expired token");
+      if (err) return res.Status(403).send("Invalid or expired token");
       req.User = user;
       next();
     });
   } catch (e) {
-    res.status(500).send(e);
+    return res.status(500).send(e);
   }
 };
 

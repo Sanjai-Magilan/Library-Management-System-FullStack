@@ -1,16 +1,66 @@
 const express = require("express");
 const router = express.Router();
-const contRoll = require("../ContRoller/control.book");
+const controll = require("../ContRoller/control.book");
 const validate = require("../Middlewares/validate.book");
+const Authentication = require("../Middlewares/UserAuth");
+const Authorization = require("../Middlewares/Authorization");
+const LowAccess = ["guest", "admin", "user"];
+const HighAccess = ["admin"];
 
-router.get("/", contRoll.GetAll);
-router.get("/get/name/:name", contRoll.GetByName);
-router.get("/get/id/:id", contRoll.GetById);
-router.get("/sort/author/:author", contRoll.SortByAuthor);
-router.get("/sort/date/:order", contRoll.SortByDate);
-router.get("/get/set/:start/:end", contRoll.GetSet);
-router.post("/add", validate, contRoll.AddBook);
-router.delete("/delete/:id", contRoll.DeleteBook);
-router.delete("/delete/name/:name", contRoll.DeleteByName);
-router.put("/update/:id", contRoll.update);
+router.get("/", Authentication, Authorization(LowAccess), controll.GetAll);
+router.get(
+  "/get/name/:name",
+  Authentication,
+  Authorization(LowAccess),
+  controll.GetByName
+);
+router.get(
+  "/get/id/:id",
+  Authentication,
+  Authorization(LowAccess),
+  controll.GetById
+);
+router.get(
+  "/sort/author/:author",
+  Authentication,
+  Authorization(LowAccess),
+  controll.SortByAuthor
+);
+router.get(
+  "/sort/date/:order",
+  Authentication,
+  Authorization(LowAccess),
+  controll.SortByDate
+);
+router.get(
+  "/get/set/:start/:end",
+  Authentication,
+  Authorization(LowAccess),
+  controll.GetSet
+);
+router.post(
+  "/add",
+  Authentication,
+  Authorization(HighAccess),
+  validate,
+  controll.AddBook
+);
+router.delete(
+  "/delete/:id",
+  Authentication,
+  Authorization(HighAccess),
+  controll.DeleteBook
+);
+router.delete(
+  "/delete/name/:name",
+  Authentication,
+  Authorization(HighAccess),
+  controll.DeleteByName
+);
+router.put(
+  "/update/:id",
+  Authentication,
+  Authorization(HighAccess),
+  controll.update
+);
 module.exports = router;
