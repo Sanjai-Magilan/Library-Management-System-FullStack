@@ -69,4 +69,28 @@ module.exports = {
       res.status(500).send(e);
     }
   },
+
+  ReturnBook: async (req, res) => {
+    const { name } = req.body;
+    const BookFound = await Book.findOne({ name });
+    if (!BookFound) return res.status(404).send("There is no Book to return in this name!");
+    if (BookFound.availability)
+        return res.status(409).send("Book the");
+      await user.findOneAndUpdate(
+        { MailId: req.User.MailId }, 
+        {
+          BorrowedBooks: null,
+          borrowedDate: null,
+          returnDate: null,
+        },
+        { new: true, runValidators: true }
+      );
+
+      await Book.findOneAndUpdate(
+        { name },
+        { availability: true },
+        { new: true, runValidators: true }
+      );
+      res.status(200).send("Returned");
+  },
 };

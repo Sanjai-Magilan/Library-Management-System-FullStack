@@ -8,10 +8,6 @@ const borrowAndReturn = ["admin", "user"];
 
 router.post("/signup", validate, Controller.CreateUser);
 router.post("/signin", Controller.LoginUser);
-router.post(
-  "/borrow",
-  Authentication,
-  Authorization(borrowAndReturn),
-  Controller.BarrowBook
-);
+router.post("/borrow", Authentication, Authorization(borrowAndReturn), Controller.BarrowBook );
+router.post("/return", Authentication, Authorization(borrowAndReturn), Controller.ReturnBook );
 module.exports = router;
