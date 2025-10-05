@@ -11,7 +11,7 @@ export default function SearchBar() {
     if (!q) return;
 
     axios
-      .get(`http://localhost:5000/Lib/get/name/${q}`) // <-- path parameter
+      .get(`http://localhost:5000/Lib/get/name/${q}`) // path parameter $(q)
       .then((res) => setResults(res.data || []))
       .catch((err) => console.error("Error fetching data:", err));
   };

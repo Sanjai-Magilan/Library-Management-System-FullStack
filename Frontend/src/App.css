@@ -1,8 +1,8 @@
 .searchPage {
   display: flex;
   flex-direction: column;
-  align-items: center;  /* centers horizontally */
-  justify-content: flex-start; /* stays near top */
+  align-items: center;  
+  justify-content: flex-start; 
   height: 100vh;
   padding-top: 40px;
 }
