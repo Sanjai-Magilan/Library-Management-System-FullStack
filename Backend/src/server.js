@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000" })); 
 require("dotenv").config();
 PORT = process.env.PORT;
 const ConnectDb = require("./database/db");
@@ -9,5 +11,5 @@ const BookRouter = require("./Router/books.routes");
 const UserRouter = require("./Router/User.routes");
 app.use(express.json());
 app.use("/Lib", BookRouter);
-app.use("/Lib/user",UserRouter);
+app.use("/Lib/user", UserRouter);
 app.listen(PORT, () => console.log(`server started at port ${PORT}`));
