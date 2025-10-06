@@ -16,9 +16,6 @@ export default function SearchBar() {
       .catch((err) => console.error("Error fetching data:", err));
   };
 
-  {
-    console.log(query);
-  }
   return (
     <div className="searchBar">
       <div className="searchBox">
@@ -35,18 +32,26 @@ export default function SearchBar() {
         </button>
       </div>
 
-     <ul className="searchResults">
-  {results.map((book, i) => (
-    <li key={i} className="bookItem">
-      <h3>{book.name}</h3>
-      <p><strong>Author:</strong> {book.author}</p>
-      <p><strong>ID:</strong> {book.id}</p>
-      <p><strong>Availability:</strong> {book.availability ? "Available" : "Not available"}</p>
-      <p><strong>Time:</strong> {new Date(book.time).toLocaleString()}</p>
-    </li>
-  ))}
-</ul>
-
+      <ul className="searchResults">
+        {results.map((book, i) => (
+          <li key={i} className="bookItem">
+            <h3>{book.name}</h3>
+            <p>
+              <strong>Author:</strong> {book.author}
+            </p>
+            <p>
+              <strong>ID:</strong> {book.id}
+            </p>
+            <p>
+              <strong>Availability:</strong>{" "}
+              {book.availability ? "Available" : "Not available"}
+            </p>
+            <p>
+              <strong>Time:</strong> {new Date(book.time).toLocaleString()}
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
