@@ -13,6 +13,8 @@ function Login() {
         <h1 className="text">Password</h1>
         <input type="password" className="mail" />
       </div>
+      <button className="button-style">Login</button>
+      <button className="text-button">Continue as Guest</button>
     </div>
   );
 }

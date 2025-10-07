@@ -6,16 +6,17 @@ body {
   padding: 0;
   background-color: #1b1b2f;
   height: 100%;
+  font-family: "Press Start 2P", "Courier New", monospace;
 }
 .login-container {
   background-color: #162447;
   display: flex;
   padding: 40px;
-  box-shadow: 0 0 25px rgba(255, 212, 96, 0.3);
+  width: 350px;
   flex-direction: column;
   align-items: center;
-  border-radius: 15px;
-  /* padding-top: 210px; */
+  margin: 150px auto;
+  border-radius: 25px;
 }
 
 .header {
@@ -55,4 +56,36 @@ body {
   font-size: 25px;
   font-family: "Press Start 2P", cursive;
   text-shadow: 3px 3px 0 #e43f5a, 6px 6px 0 #162447;
+}
+
+.button-style {
+  font-family: "Press Start 2P", cursive;
+  font-size: 14px;
+  color: #ffd460;
+  background-color: #162447;
+  border: 3px solid #ffd460;
+  padding: 10px 20px;
+  margin-top: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-shadow: 2px 2px 0 #e43f5a;
+  box-shadow: 4px 4px 0 #e43f5a; 
+  transition: all 0.1s ease-in-out;
+}
+
+.button-style:active {
+  box-shadow: 2px 2px 0 #e43f5a;
+  transform: translate(2px, 2px); 
+}
+
+.text-button{
+   background: none;
+  border: none;
+  color: #ffd460;
+  font-family: "Press Start 2P", cursive;
+  font-size: 10px;
+  cursor: pointer;
+  text-shadow: 2px 2px 0 #e43f5a;
+  transition: all 0.2s ease-in-out;
+  margin-top: 30px;
 }
