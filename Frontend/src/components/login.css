@@ -8,6 +8,7 @@ body {
   height: 100%;
 }
 .login-container {
+  color: #dfdfed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .text {
@@ -32,7 +33,6 @@ body {
   opacity: 0.6;
   align-items: center;
   font-family: "Press Start 2P", cursive;
-  outline: none;
 }
 
 .mail {
@@ -41,11 +41,11 @@ body {
   width: 250px;
 }
 
-.mail:focus-within {
+.mail:focus {
+  outline: none;
   border-color: #ffd460;
   box-shadow: 0 0 15px rgba(255, 212, 96, 0.7);
 }
-
 
 .text-head {
   color: #ffd460;
