@@ -10,4 +10,19 @@
 }
 
 
+.arcade {
+  font-size: 28px;
+  color: #FFD460;
+  text-shadow: 3px 3px 0 #E43F5A, 6px 6px 0 #162447;
+  margin-bottom: 20px;
+}
+
+.searchPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  font-family: "Press Start 2P", cursive;
+}
 
