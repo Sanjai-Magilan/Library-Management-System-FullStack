@@ -89,3 +89,10 @@ body {
   transition: all 0.2s ease-in-out;
   margin-top: 30px;
 }
+
+.email {
+  color: #ffd460;
+  font-size: 20px;
+  font-family: "Press Start 2P", cursive;
+  text-shadow: 3px 3px 0 #e43f5a, 6px 6px 0 #162447;
+}
