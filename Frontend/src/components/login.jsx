@@ -2,11 +2,29 @@ import React from "react";
 import { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [MailId, setMailId] = useState("");
+  const [Password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/Lib/user/signin", {
+        MailId,
+        Password,
+      });
+      localStorage.setItem("token", res.data.Authentication);
+      console.log(res.data.token)
+      navigate("/SearchBar");
+    } catch (err) {
+      console.error(err.response?.data || err);
+      alert("Login failed");
+    }
+  };
+
   const goTo = () => {
     navigate("/SearchBar");
   };
@@ -18,18 +36,20 @@ function Login() {
         <input
           type="email"
           className="mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={MailId}
+          onChange={(e) => setMailId(e.target.value)}
         />
         <h1 className="text">Password</h1>
         <input
           type="password"
           className="mail"
-          value={password}
+          value={Password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button className="button-style">Login</button>
+      <button className="button-style" onClick={loginUser}>
+        Login
+      </button>
       <button className="text-button" onClick={goTo}>
         Continue as Guest
       </button>
