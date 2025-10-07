@@ -8,10 +8,13 @@ body {
   height: 100%;
 }
 .login-container {
-  color: #dfdfed;
+  background-color: #162447;
   display: flex;
+  padding: 40px;
+  box-shadow: 0 0 25px rgba(255, 212, 96, 0.3);
   flex-direction: column;
   align-items: center;
+  border-radius: 15px;
   /* padding-top: 210px; */
 }
 
