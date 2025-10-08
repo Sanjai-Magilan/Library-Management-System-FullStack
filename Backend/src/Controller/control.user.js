@@ -27,7 +27,7 @@ module.exports = {
           process.env.ACCESS_TOKEN,
           { expiresIn: "1h" }
         );
-        res.status(200).json({ Authentication: auth });
+        res.status(200).json({ token: auth });
       } else {
         res.status(401).send("Incorrect password");
       }

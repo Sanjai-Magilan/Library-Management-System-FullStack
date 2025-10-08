@@ -16,8 +16,7 @@ function Login() {
         MailId,
         Password,
       });
-      localStorage.setItem("token", res.data.Authentication);
-      console.log(res.data.token)
+      localStorage.setItem("token", res.data.token);
       navigate("/SearchBar");
     } catch (err) {
       console.error(err.response?.data || err);
