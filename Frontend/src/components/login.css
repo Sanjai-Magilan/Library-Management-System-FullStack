@@ -69,17 +69,17 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   text-shadow: 2px 2px 0 #e43f5a;
-  box-shadow: 4px 4px 0 #e43f5a; 
+  box-shadow: 4px 4px 0 #e43f5a;
   transition: all 0.1s ease-in-out;
 }
 
 .button-style:active {
   box-shadow: 2px 2px 0 #e43f5a;
-  transform: translate(2px, 2px); 
+  transform: translate(2px, 2px);
 }
 
-.text-button{
-   background: none;
+.text-button {
+  background: none;
   border: none;
   color: #ffd460;
   font-family: "Press Start 2P", cursive;
