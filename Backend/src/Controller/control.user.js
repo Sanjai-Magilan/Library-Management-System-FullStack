@@ -93,4 +93,14 @@ module.exports = {
     );
     res.status(200).send("Returned");
   },
+
+  GetUser: async (req, res) => {
+    try {
+      const MailId = req.User.MailId;
+      const User = await user.findOne({ MailId });
+      res.status(200).send(User);
+    } catch (e) {
+      res.status(500).send(e);
+    }
+  },
 };

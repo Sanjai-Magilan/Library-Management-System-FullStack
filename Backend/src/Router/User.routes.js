@@ -20,4 +20,11 @@ router.post(
   Authorization(borrowAndReturn),
   Controller.ReturnBook
 );
+
+router.get(
+  "/getUser",
+  Authentication,
+  Authorization(borrowAndReturn),
+  Controller.GetUser
+);
 module.exports = router;
