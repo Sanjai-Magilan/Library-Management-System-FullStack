@@ -56,11 +56,11 @@ function UserProfile() {
       {open && (
         <div className="user-dropdown">
           <div className="user-info">
-            <p className="user-name">User name {user.Username}</p>
-            <p className="user-email">Email Id {user.MailId}</p>
-            <p className="user-email">Borrowed Books {user.BorrowedBooks}</p>
-            <p className="user-email">Borrowed Date {user.borrowedDate}</p>
-            <p className="user-email">Return Date {user.returnDate}</p>
+            <p className="user-email">User name <span>{user.Username}</span></p>
+            <p className="user-email">Email Id <span>{user.MailId}</span></p>
+            <p className="user-email">Borrowed Books <span>{user.BorrowedBooks}</span></p>
+            <p className="user-email">Borrowed Date <span>{user.borrowedDate}</span></p>
+            <p className="user-email">Return Date <span>{user.returnDate}</span></p>
           </div>
           <button className="buttonStyle">Return Book</button>
           <button className="button-style" onClick={handleLogout}>

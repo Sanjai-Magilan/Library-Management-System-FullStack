@@ -71,3 +71,7 @@
   box-shadow: 2px 2px 0 #e43f5a;
   transform: translate(2px, 2px);
 }
+
+.user-email span{
+  color :#e43f5a
+}
