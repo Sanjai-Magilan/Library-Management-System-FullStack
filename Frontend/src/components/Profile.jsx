@@ -13,10 +13,9 @@ function UserProfile() {
 
   const handleLogout = () => {
     try {
-      console.log("here");
       localStorage.removeItem("token");
       setUser(null);
-      navigate("./login");
+      navigate("/login");
     } catch (e) {
       console.error(`failed to log out ${e}`);
     }
