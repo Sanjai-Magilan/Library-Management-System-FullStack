@@ -29,7 +29,7 @@
 .user-dropdown {
   position: absolute;
   top: 65px;
-  right: 0;
+  right: 0px;
   background: #162447;
   border: 2px solid #e43f5a;
   border-radius: 10px;
@@ -47,10 +47,9 @@
   line-height: 1.5;
   font-size: 12px;
   display: block;
-  margin: 8px 0;
+  margin: 9px 0px;
   transition: color 0.25s, transform 0.25s;
 }
-
 
 .buttonStyle {
   font-family: "Press Start 2P", cursive;
@@ -72,6 +71,8 @@
   transform: translate(2px, 2px);
 }
 
-.user-email span{
-  color :#e43f5a
+.user-email span {
+  color: #e43f5a;
+  display: block;
+  margin-top: 4px;
 }

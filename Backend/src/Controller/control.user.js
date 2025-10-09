@@ -39,21 +39,22 @@ module.exports = {
   BarrowBook: async (req, res) => {
     try {
       const today = new Date();
-      const borrowedDate = today.toISOString().split("T")[0];
+      const BorrowedDate = today.toISOString().split("T")[0];
       const returnDate = new Date(today);
       returnDate.setDate(returnDate.getDate() + 14);
       const ReturnDate = returnDate.toISOString().split("T")[0];
-
+      
       const { name } = req.body;
       const BookFound = await Book.findOne({ name });
       if (!BookFound) return res.status(404).send("Book Not Found");
       if (!BookFound.availability)
         return res.status(409).send("Book not available");
+      console.log(BorrowedDate)
       await user.findOneAndUpdate(
         { MailId: req.User.MailId }, // we find data by {data key in db : our search data}
         {
           BorrowedBooks: name,
-          borrowedDate: borrowedDate,
+          borrowedDate: BorrowedDate,
           returnDate: ReturnDate,
         },
         { new: true, runValidators: true }
@@ -75,7 +76,7 @@ module.exports = {
     const BookFound = await Book.findOne({ name });
     if (!BookFound)
       return res.status(404).send("There is no Book to return in this name!");
-    if (BookFound.availability) return res.status(409).send("Book the");
+    if (BookFound.availability) return res.status(409).send("Book the is not borrowed error");
     await user.findOneAndUpdate(
       { MailId: req.User.MailId },
       {
@@ -98,7 +99,16 @@ module.exports = {
     try {
       const MailId = req.User.MailId;
       const User = await user.findOne({ MailId });
-      res.status(200).send(User);
+      const cleanUser = {
+        ...User._doc,
+        borrowedDate: User.borrowedDate
+        ? User.borrowedDate.toISOString().split("T")[0]
+        : null,
+        returnDate: User.returnDate
+        ? User.returnDate.toISOString().split("T")[0]
+        : null,
+      };
+      res.status(200).send(cleanUser);
     } catch (e) {
       res.status(500).send(e);
     }

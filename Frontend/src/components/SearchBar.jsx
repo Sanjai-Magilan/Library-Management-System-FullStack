@@ -10,7 +10,6 @@ export default function SearchBar() {
 
   const BookBorrow = async (name) => {
     try {
-      console.log("here");
       const token = localStorage.getItem("token");
 
       await axios.post(
