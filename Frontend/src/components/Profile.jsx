@@ -1,39 +1,72 @@
-import personImg from "../assets/user-u.png";
+import personImg from "../assets/person.png";
 import React from "react";
 import axios from "axios";
+import "./Profile.css";
+import Login from "./login.jsx";
+import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 function UserProfile() {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
-  const UserProfile = async () => {
+  const handleLogout = () => {
+    try {
+      console.log("here");
+      localStorage.removeItem("token");
+      setUser(null);
+      navigate("./login");
+    } catch (e) {
+      console.error(`failed to log out ${e}`);
+    }
+  };
+
+  const User_Profile = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.get("http://localhost:5000/Lib/user/getUser", {
-        header: {
-          Authorization: `Bearer ${token}`,
+      if (!token) {
+        console.warn("No token found, you have guest access");
+      }
+      const response = await axios.get(
+        "http://localhost:5000/Lib/user/getUser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-          .then((res) => setUser(res.data || {}))
-          .catch((err) => console.error("Error fetching data:", err)),
-      });
+      );
+
+      setUser(response.data || {});
     } catch (err) {
-      console.error(err.response?.data || err);
+      console.error("Error fetching data:", err.response?.data || err);
     }
+    console.log();
   };
 
   return (
     <div className="usercontainer">
-      <button className="avatar-btn" onClick={() => setOpen(!open)}>
+      <button
+        className="avatar-btn"
+        onClick={() => {
+          setOpen(!open), User_Profile();
+        }}
+      >
         <img src={personImg} alt="avatar" className="avatar-img" />
       </button>
       {open && (
         <div className="user-dropdown">
           <div className="user-info">
-            <p className="user-name">{user.Username}</p>
-            <p className="user-email">{user.MailId}</p>
+            <p className="user-name">User name {user.Username}</p>
+            <p className="user-email">Email Id {user.MailId}</p>
+            <p className="user-email">Borrowed Books {user.BorrowedBooks}</p>
+            <p className="user-email">Borrowed Date {user.borrowedDate}</p>
+            <p className="user-email">Return Date {user.returnDate}</p>
           </div>
-          <button className="logout-btn">Logout</button>
+          <button className="buttonStyle">Return Book</button>
+          <button className="button-style" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       )}
     </div>

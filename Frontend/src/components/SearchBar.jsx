@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./SearchBar.css";
+import Profile from "./Profile";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -18,6 +19,7 @@ export default function SearchBar() {
 
   return (
     <>
+    <Profile/>
       <div className="searchPage">
         <h1 className="arcade">Library</h1>
         <div className="searchBar">
