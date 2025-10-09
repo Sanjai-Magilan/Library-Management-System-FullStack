@@ -96,7 +96,7 @@ body {
 .searchResults li:hover {
   background: #e43f5a;
   color: #1b1b2f;
-  transform: scale(1.5);
+  transform: scale(1.2);
   box-shadow: 0 0 15px rgba(255, 212, 96, 0.6);
 }
 
@@ -123,4 +123,24 @@ body {
   align-items: center;
   padding-top: 40px;
   font-family: "Press Start 2P", cursive;
+}
+
+.button_Style {
+  font-family: "Press Start 2P", cursive;
+  font-size: 11px;
+  color: #ffd460;
+  background-color: #162447;
+  border: 3px solid #ffd460;
+  padding: 10px 20px;
+  margin-top: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-shadow: 2px 2px 0 #ff002b;
+  box-shadow: 4px 4px 0 #ff002b;
+  transition: all 0.1s ease-in-out;
+}
+
+.button_Style:active {
+  box-shadow: 2px 2px 0 #e43f5a;
+  transform: translate(2px, 2px);
 }

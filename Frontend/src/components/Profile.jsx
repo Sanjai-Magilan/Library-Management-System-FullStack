@@ -40,7 +40,6 @@ function UserProfile() {
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err);
     }
-    console.log();
   };
 
   return (

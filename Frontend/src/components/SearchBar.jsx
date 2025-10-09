@@ -6,6 +6,28 @@ import Profile from "./Profile";
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  // const [borrowbook, setBorrowbook] = useState([]);
+
+  const BookBorrow = async (name) => {
+    try {
+      console.log("here");
+      const token = localStorage.getItem("token");
+
+      await axios.post(
+        "http://localhost:5000/Lib/user/borrow",
+        {
+          name: name,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.error("Error fetching data:", err.response?.data || err);
+    }
+  };
 
   const fetchResults = () => {
     const q = query.trim();
@@ -19,7 +41,7 @@ export default function SearchBar() {
 
   return (
     <>
-    <Profile/>
+      <Profile />
       <div className="searchPage">
         <h1 className="arcade">Library</h1>
         <div className="searchBar">
@@ -54,6 +76,12 @@ export default function SearchBar() {
                 <p>
                   <strong>Time:</strong> {new Date(book.time).toLocaleString()}
                 </p>
+                <button
+                  className="button_Style"
+                  onClick={() => BookBorrow(book.name)}
+                >
+                  Borrow
+                </button>
               </li>
             ))}
           </ul>
