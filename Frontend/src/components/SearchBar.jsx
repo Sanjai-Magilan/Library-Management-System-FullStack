@@ -77,7 +77,7 @@ export default function SearchBar() {
                 </p>
                 <button
                   className="button_Style"
-                  onClick={() => BookBorrow(book.name)}
+                  onClick={async() => {await BookBorrow(book.name);fetchResults()}}
                 >
                   Borrow
                 </button>
