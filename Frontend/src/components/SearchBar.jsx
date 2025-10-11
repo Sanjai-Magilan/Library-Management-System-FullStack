@@ -6,12 +6,10 @@ import Profile from "./Profile";
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  // const [borrowbook, setBorrowbook] = useState([]);
 
   const BookBorrow = async (name) => {
     try {
       const token = localStorage.getItem("token");
-
       await axios.post(
         "http://localhost:5000/Lib/user/borrow",
         {
@@ -28,11 +26,11 @@ export default function SearchBar() {
     }
   };
 
-  const fetchResults = () => {
+  const fetchResults = async () => {
     const q = query.trim();
     if (!q) return;
 
-    axios
+    await axios
       .get(`http://localhost:5000/Lib/get/name/${q}`) // path parameter $(q)
       .then((res) => setResults(res.data || []))
       .catch((err) => console.error("Error fetching data:", err));
@@ -77,7 +75,10 @@ export default function SearchBar() {
                 </p>
                 <button
                   className="button_Style"
-                  onClick={async() => {await BookBorrow(book.name);fetchResults()}}
+                  onClick={async () => {
+                    await BookBorrow(book.name);
+                    fetchResults();
+                  }}
                 >
                   Borrow
                 </button>

@@ -4,12 +4,14 @@ import axios from "axios";
 import "./Profile.css";
 import Login from "./login.jsx";
 import { useNavigate } from "react-router-dom";
-
 import { useState } from "react";
+
 function UserProfile() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
+  const [borrowbook, setBorrowbook] = useState([]);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     try {
@@ -21,9 +23,26 @@ function UserProfile() {
     }
   };
 
+  const ReturnBook = async () => {
+    try {
+      await axios.post(
+        "http://localhost:5000/Lib/user/return",
+        {
+          name: borrowbook,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const User_Profile = async () => {
     try {
-      const token = localStorage.getItem("token");
       if (!token) {
         console.warn("No token found, you have guest access");
       }
@@ -37,6 +56,7 @@ function UserProfile() {
       );
 
       setUser(response.data || {});
+      setBorrowbook(user.BorrowedBooks);
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err);
     }
@@ -71,7 +91,9 @@ function UserProfile() {
               Return Date<span>{user.returnDate}</span>
             </p>
           </div>
-          <button className="buttonStyle">Return Book</button>
+          <button className="buttonStyle" onClick={ReturnBook}>
+            Return Book
+          </button>
           <button className="button-style" onClick={handleLogout}>
             Logout
           </button>

@@ -49,7 +49,6 @@ module.exports = {
       if (!BookFound) return res.status(404).send("Book Not Found");
       if (!BookFound.availability)
         return res.status(409).send("Book not available");
-      console.log(BorrowedDate)
       await user.findOneAndUpdate(
         { MailId: req.User.MailId }, // we find data by {data key in db : our search data}
         {
