@@ -9,9 +9,6 @@ module.exports = {
       const HashPass = await bcrypt.hash(req.body.Password, 10);
       const UserInfo = new user({ ...req.body, Password: HashPass });
       await UserInfo.save();
-      //   res.status(201).send("Account created successfull");
-      console.log(UserInfo);
-
       const auth = jwt.sign(
         { MailId: req.body.MailId, UserRole: "user" },
         process.env.ACCESS_TOKEN,
