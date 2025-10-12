@@ -27,9 +27,9 @@ function Login() {
   const goTo = () => {
     navigate("/SearchBar");
   };
-  const reg =()=>{
-    navigate("/Register")
-  }
+  const reg = () => {
+    navigate("/Register");
+  };
   return (
     <div className="login-container">
       <div className="header">
@@ -52,8 +52,8 @@ function Login() {
       <button className="button-style" onClick={loginUser}>
         Login
       </button>
-       <button className="text-button" onClick={reg}>
-        Don't have an account register?
+      <button className="text-button" onClick={reg}>
+        create an account
       </button>
       <button className="text-button" onClick={goTo}>
         Continue as Guest
