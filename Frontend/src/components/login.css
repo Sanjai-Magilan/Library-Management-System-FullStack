@@ -90,6 +90,13 @@ body {
   margin-top: 30px;
 }
 
+.text-button:hover{
+   text-shadow: 
+    0 0 2px #ffd460,
+    0 0 20px #ffd460,
+    0 0 5px #ffd460;
+}
+
 .email {
   color: #ffd460;
   font-size: 20px;
