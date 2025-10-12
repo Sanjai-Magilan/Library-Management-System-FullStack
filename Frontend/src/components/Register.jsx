@@ -13,6 +13,7 @@ function Register() {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
+      console.log("here")
       const res = await axios.post("http://localhost:5000/Lib/user/signup", {
         MailId,
         Username,

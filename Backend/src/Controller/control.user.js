@@ -10,7 +10,14 @@ module.exports = {
       const UserInfo = new user({ ...req.body, Password: HashPass });
       await UserInfo.save();
       //   res.status(201).send("Account created successfull");
-      res.status(201).json(UserInfo);
+      console.log(UserInfo);
+
+      const auth = jwt.sign(
+        { MailId: req.body.MailId, UserRole: "user" },
+        process.env.ACCESS_TOKEN,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({ token: auth });
     } catch (e) {
       res.status(400).send(e);
     }
@@ -43,7 +50,7 @@ module.exports = {
       const returnDate = new Date(today);
       returnDate.setDate(returnDate.getDate() + 14);
       const ReturnDate = returnDate.toISOString().split("T")[0];
-      
+
       const { name } = req.body;
       const BookFound = await Book.findOne({ name });
       if (!BookFound) return res.status(404).send("Book Not Found");
@@ -75,7 +82,8 @@ module.exports = {
     const BookFound = await Book.findOne({ name });
     if (!BookFound)
       return res.status(404).send("There is no Book to return in this name!");
-    if (BookFound.availability) return res.status(409).send("Book the is not borrowed error");
+    if (BookFound.availability)
+      return res.status(409).send("Book the is not borrowed error");
     await user.findOneAndUpdate(
       { MailId: req.User.MailId },
       {
@@ -101,11 +109,11 @@ module.exports = {
       const cleanUser = {
         ...User._doc,
         borrowedDate: User.borrowedDate
-        ? User.borrowedDate.toISOString().split("T")[0]
-        : null,
+          ? User.borrowedDate.toISOString().split("T")[0]
+          : null,
         returnDate: User.returnDate
-        ? User.returnDate.toISOString().split("T")[0]
-        : null,
+          ? User.returnDate.toISOString().split("T")[0]
+          : null,
       };
       res.status(200).send(cleanUser);
     } catch (e) {
