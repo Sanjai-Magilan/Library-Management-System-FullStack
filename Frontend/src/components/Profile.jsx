@@ -36,6 +36,7 @@ function UserProfile() {
           },
         }
       );
+      User_Profile();
     } catch (e) {
       console.log(e);
     }

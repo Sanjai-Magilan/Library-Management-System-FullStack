@@ -53,7 +53,7 @@ function Login() {
         Login
       </button>
       <button className="text-button" onClick={reg}>
-        create an account
+        Create an account
       </button>
       <button className="text-button" onClick={goTo}>
         Continue as Guest
