@@ -20,5 +20,3 @@ app.use(express.json());
 app.use("/Lib", BookRouter);
 app.use("/Lib/user", UserRouter);
 app.listen(PORT, () => console.log(`server started at port ${PORT}`));
-
-module.exports = app;
