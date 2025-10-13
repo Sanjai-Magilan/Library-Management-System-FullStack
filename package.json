@@ -7,7 +7,7 @@
     "concurrently": "^9.2.1"
   },
   "scripts": {
-  "dev": "concurrently \"nodemon Backend/src/server.js\" \"npm run --prefix Frontend dev\""
+  "dev": "concurrently \"nodemon Backend/src/api/server.js\" \"npm run --prefix Frontend dev\""
 }
 
 }

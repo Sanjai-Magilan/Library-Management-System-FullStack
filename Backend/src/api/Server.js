@@ -12,10 +12,10 @@ app.use(
 
 require("dotenv").config();
 PORT = process.env.PORT;
-const ConnectDb = require("./database/db");
+const ConnectDb = require("../database/db");
 ConnectDb();
-const BookRouter = require("./Router/books.routes");
-const UserRouter = require("./Router/User.routes");
+const BookRouter = require("../Router/books.routes");
+const UserRouter = require("../Router/User.routes");
 app.use(express.json());
 app.use("/Lib", BookRouter);
 app.use("/Lib/user", UserRouter);
