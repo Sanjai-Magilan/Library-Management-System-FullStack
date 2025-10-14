@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://your-frontend.vercel.app"],
+    origin: ["http://localhost:3000", "https://library-management-system-full-stack-kfqzcszgb.vercel.app"],
   })
 );
 
