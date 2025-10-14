@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./SearchBar.css";
 import Profile from "./Profile";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -11,7 +12,7 @@ export default function SearchBar() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/Lib/user/borrow",
+        `${API_BASE_URL}/Lib/user/borrow`,
         {
           name: name,
         },
@@ -31,7 +32,7 @@ export default function SearchBar() {
     if (!q) return;
 
     await axios
-      .get(`http://localhost:5000/Lib/get/name/${q}`) // path parameter $(q)
+      .get(`${API_BASE_URL}/Lib/get/name/${q}`) // path parameter $(q)
       .then((res) => setResults(res.data || []))
       .catch((err) => console.error("Error fetching data:", err));
   };

@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function Register() {
   const [MailId, setMailId] = useState("");
@@ -13,7 +14,7 @@ function Register() {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/Lib/user/signup", {
+      const res = await axios.post(`${API_BASE_URL}/Lib/user/signup`, {
         MailId,
         Username,
         Password,

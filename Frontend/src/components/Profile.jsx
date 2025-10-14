@@ -5,6 +5,7 @@ import "./Profile.css";
 import Login from "./login.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function UserProfile() {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ function UserProfile() {
   const ReturnBook = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/Lib/user/return",
+        `${API_BASE_URL}/Lib/user/return`,
         {
           name: borrowbook,
         },
@@ -48,7 +49,7 @@ function UserProfile() {
         console.warn("No token found, you have guest access");
       }
       const response = await axios.get(
-        "http://localhost:5000/Lib/user/getUser",
+        `${API_BASE_URL}/Lib/user/getUser`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
