@@ -7,9 +7,11 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [book,setBook]= useState("");
 
   const BookBorrow = async (name) => {
     try {
+      setBook(name);
       const token = localStorage.getItem("token");
       await axios.post(
         `${API_BASE_URL}/Lib/user/borrow`,
@@ -39,7 +41,6 @@ export default function SearchBar() {
 
   return (
     <>
-      <Profile />
       <div className="searchPage">
         <h1 className="arcade">Library</h1>
         <div className="searchBar">
@@ -88,6 +89,7 @@ export default function SearchBar() {
           </ul>
         </div>
       </div>
+      <Profile Book ={book}/>
     </>
   );
 }
