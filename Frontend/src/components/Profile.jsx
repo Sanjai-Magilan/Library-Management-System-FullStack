@@ -1,13 +1,12 @@
 import personImg from "../assets/person.png";
-import React, { useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
 import Login from "./login.jsx";
+import React, { useState, useCallback ,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile(Availability,fetchResults) {
+function UserProfile(Availability, fetchResults) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
@@ -44,7 +43,7 @@ function UserProfile(Availability,fetchResults) {
     }
   };
 
-  const User_Profile = async () => {
+  const User_Profile = useCallback(async () => {
     try {
       if (!token) {
         console.warn("No token found, you have guest access");
@@ -60,11 +59,11 @@ function UserProfile(Availability,fetchResults) {
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err);
     }
-  };
+  },[token,user.BorrowedBooks]);
 
   useEffect(() => {
     User_Profile();
-  }, [Availability]);
+  }, [Availability , User_Profile]);
 
   return (
     <div className="usercontainer">
