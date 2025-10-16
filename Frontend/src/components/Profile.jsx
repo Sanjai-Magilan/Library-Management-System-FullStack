@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile(Book) {
+function UserProfile(Book, fetch) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
@@ -38,53 +38,50 @@ function UserProfile(Book) {
         }
       );
       User_Profile();
+      fetch();
     } catch (e) {
       console.log(e);
     }
   };
 
-  const User_Profile = () => {
-    useEffect(() => {
-      const fetchUser = async () => {
-        try {
-          if (!token) {
-            console.warn("No token found, you have guest access");
-          }
-          const response = await axios.get(`${API_BASE_URL}/Lib/user/getUser`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+  const User_Profile = async () => {
+    try {
+      if (!token) {
+        console.warn("No token found, you have guest access");
+      }
+      const response = await axios.get(`${API_BASE_URL}/Lib/user/getUser`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-          setUser(response.data || {});
-          setBorrowbook(user.BorrowedBooks);
-        } catch (err) {
-          console.error("Error fetching data:", err.response?.data || err);
-        }
-      };
-      fetchUser;
-    }, [Book]);
+      setUser(response.data || {});
+      setBorrowbook(user.BorrowedBooks);
+    } catch (err) {
+      console.error("Error fetching data:", err.response?.data || err);
+    }
   };
 
-  //   useEffect(()=>{
-  //       const fetchUser = async () => {
-  //  try {
-  //       if (!token) {
-  //         console.warn("No token found, you have guest access");
-  //       }
-  //       const response = await axios.get(`${API_BASE_URL}/Lib/user/getUser`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        if (!token) {
+          console.warn("No token found, you have guest access");
+        }
+        const response = await axios.get(`${API_BASE_URL}/Lib/user/getUser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  //       setUser(response.data || {});
-  //       setBorrowbook(user.BorrowedBooks);
-  //     } catch (err) {
-  //       console.error("Error fetching data:", err.response?.data || err);
-  //     }
-  //   }
-  //   fetchUser()},[Book])
+        setUser(response.data || {});
+        setBorrowbook(response.BorrowedBooks);
+      } catch (err) {
+        console.error("Error fetching data:", err.response?.data || err);
+      }
+    };
+    fetchUser;
+  }, [Book, token]);
 
   return (
     <div className="usercontainer">

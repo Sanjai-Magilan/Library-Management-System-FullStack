@@ -7,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const [book,setBook]= useState("");
+  const [book, setBook] = useState("");
 
   const BookBorrow = async (name) => {
     try {
@@ -89,7 +89,7 @@ export default function SearchBar() {
           </ul>
         </div>
       </div>
-      <Profile Book ={book}/>
+      <Profile Book={book.availability} fetch={fetchResults} />
     </>
   );
 }
