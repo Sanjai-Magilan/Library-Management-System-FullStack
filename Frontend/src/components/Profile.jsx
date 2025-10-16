@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile(Book, fetch) {
+function UserProfile(Availability,fetchResults) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
@@ -38,7 +38,7 @@ function UserProfile(Book, fetch) {
         }
       );
       User_Profile();
-      fetch();
+      fetchResults();
     } catch (e) {
       console.log(e);
     }
@@ -63,25 +63,8 @@ function UserProfile(Book, fetch) {
   };
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!token) {
-          console.warn("No token found, you have guest access");
-        }
-        const response = await axios.get(`${API_BASE_URL}/Lib/user/getUser`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setUser(response.data || {});
-        setBorrowbook(response.BorrowedBooks);
-      } catch (err) {
-        console.error("Error fetching data:", err.response?.data || err);
-      }
-    };
-    fetchUser;
-  }, [Book, token]);
+    User_Profile();
+  }, [Availability]);
 
   return (
     <div className="usercontainer">
