@@ -6,7 +6,7 @@ import React, { useState, useCallback ,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile(Availability, fetchResults) {
+function UserProfile({Availability, Refetch}) {// if we pass two props use {}
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
@@ -36,8 +36,8 @@ function UserProfile(Availability, fetchResults) {
           },
         }
       );
-      User_Profile();
-      fetchResults();
+      await User_Profile();
+      Refetch();
     } catch (e) {
       console.log(e);
     }

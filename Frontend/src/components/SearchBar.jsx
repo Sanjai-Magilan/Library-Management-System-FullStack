@@ -89,7 +89,7 @@ export default function SearchBar() {
           </ul>
         </div>
       </div>
-      <Profile Book={book.availability} fetch={fetchResults} />
+      <Profile Book={book.availability} Refetch={fetchResults} />
     </>
   );
 }
