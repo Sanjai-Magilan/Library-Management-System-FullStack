@@ -2,17 +2,17 @@ import personImg from "../assets/person.png";
 import axios from "axios";
 import "./Profile.css";
 import Login from "./login.jsx";
-import React, { useState, useCallback ,useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile({Availability, Refetch}) {// if we pass two props use {}
+function UserProfile(props) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
+  console.log(props.availability);
   const handleLogout = () => {
     try {
       localStorage.removeItem("token");
@@ -37,7 +37,7 @@ function UserProfile({Availability, Refetch}) {// if we pass two props use {}
         }
       );
       await User_Profile();
-      Refetch();
+      props.Refetch();
     } catch (e) {
       console.log(e);
     }
@@ -59,11 +59,11 @@ function UserProfile({Availability, Refetch}) {// if we pass two props use {}
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err);
     }
-  },[token,user.BorrowedBooks]);
+  }, [token, user.BorrowedBooks]);
 
   useEffect(() => {
     User_Profile();
-  }, [Availability , User_Profile]);
+  }, [props.availability, User_Profile]);
 
   return (
     <div className="usercontainer">
