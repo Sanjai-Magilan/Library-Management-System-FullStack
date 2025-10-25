@@ -8,7 +8,6 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [book, setBook] = useState("");
-
   const BookBorrow = async (name) => {
     try {
       setBook(name);
@@ -38,7 +37,7 @@ export default function SearchBar() {
       .then((res) => setResults(res.data || []))
       .catch((err) => console.error("Error fetching data:", err));
   };
-
+  
   return (
     <>
       <div className="searchPage">

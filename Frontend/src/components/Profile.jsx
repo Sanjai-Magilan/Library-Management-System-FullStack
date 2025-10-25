@@ -12,7 +12,7 @@ function UserProfile(props) {
   const [borrowbook, setBorrowbook] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  console.log(props.availability);
+  console.log(props);
   const handleLogout = () => {
     try {
       localStorage.removeItem("token");
