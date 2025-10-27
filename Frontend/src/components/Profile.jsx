@@ -83,7 +83,7 @@ function UserProfile(props) {
             </p>
             <p className="user-email">
               Email Id <span>{user.MailId}</span>
-            </p>
+            </p>{user.BorrowedBooks !== undefined &&(<>
             <p className="user-email">
               Borrowed Books <span>{user.BorrowedBooks}</span>
             </p>
@@ -92,7 +92,7 @@ function UserProfile(props) {
             </p>
             <p className="user-email">
               Return Date<span>{user.returnDate}</span>
-            </p>
+            </p></>)}
           </div>
           <button className="buttonStyle" onClick={ReturnBook}>
             Return Book
