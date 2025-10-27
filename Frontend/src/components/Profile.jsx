@@ -1,13 +1,12 @@
 import personImg from "../assets/person.png";
-import React, { useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
 import Login from "./login.jsx";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-function UserProfile(Availability,fetchResults) {
+function UserProfile(props) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState("");
   const [borrowbook, setBorrowbook] = useState([]);
@@ -37,14 +36,14 @@ function UserProfile(Availability,fetchResults) {
           },
         }
       );
-      User_Profile();
-      fetchResults();
+      await User_Profile();
+      props.Refetch();
     } catch (e) {
       console.log(e);
     }
   };
 
-  const User_Profile = async () => {
+  const User_Profile = useCallback(async () => {
     try {
       if (!token) {
         console.warn("No token found, you have guest access");
@@ -60,12 +59,12 @@ function UserProfile(Availability,fetchResults) {
     } catch (err) {
       console.error("Error fetching data:", err.response?.data || err);
     }
-  };
+  }, [token, user.BorrowedBooks]);
 
   useEffect(() => {
     User_Profile();
-  }, [Availability]);
-
+  }, [props.availability, User_Profile]);
+user.BorrowedBooks 
   return (
     <div className="usercontainer">
       <button
@@ -84,7 +83,7 @@ function UserProfile(Availability,fetchResults) {
             </p>
             <p className="user-email">
               Email Id <span>{user.MailId}</span>
-            </p>
+            </p>{user.BorrowedBooks !== null &&(<>
             <p className="user-email">
               Borrowed Books <span>{user.BorrowedBooks}</span>
             </p>
@@ -93,7 +92,7 @@ function UserProfile(Availability,fetchResults) {
             </p>
             <p className="user-email">
               Return Date<span>{user.returnDate}</span>
-            </p>
+            </p></>)}
           </div>
           <button className="buttonStyle" onClick={ReturnBook}>
             Return Book
