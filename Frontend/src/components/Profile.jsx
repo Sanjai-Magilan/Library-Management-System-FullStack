@@ -12,7 +12,7 @@ function UserProfile(props) {
   const [borrowbook, setBorrowbook] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  console.log(props);
+
   const handleLogout = () => {
     try {
       localStorage.removeItem("token");
@@ -64,7 +64,7 @@ function UserProfile(props) {
   useEffect(() => {
     User_Profile();
   }, [props.availability, User_Profile]);
-
+user.BorrowedBooks 
   return (
     <div className="usercontainer">
       <button
@@ -83,7 +83,7 @@ function UserProfile(props) {
             </p>
             <p className="user-email">
               Email Id <span>{user.MailId}</span>
-            </p>{user.BorrowedBooks !== undefined &&(<>
+            </p>{user.BorrowedBooks !== null &&(<>
             <p className="user-email">
               Borrowed Books <span>{user.BorrowedBooks}</span>
             </p>
