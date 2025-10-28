@@ -10,19 +10,8 @@ export default function SearchBar() {
   const token = localStorage.getItem("token");
   console.log(token);
 
-  // useEffect(() => {
-  //   const Temp = () => {
-  //     localStorage.getItem("token");
-  //     setToken(Temp);
-  //   }
-  //   Temp();
-  // }, []);
-
-  //const [book, setBook] = useState("");
   const BookBorrow = async (name) => {
     try {
-      //setBook(name);
-
       console.log(token);
       await axios.post(
         `${API_BASE_URL}/Lib/user/borrow`,
