@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import axios from "axios";
 import "./SearchBar.css";
 import Profile from "./Profile";
@@ -7,11 +7,23 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const token = localStorage.getItem("token");
+  console.log(token);
+
+  // useEffect(() => {
+  //   const Temp = () => {
+  //     localStorage.getItem("token");
+  //     setToken(Temp);
+  //   }
+  //   Temp();
+  // }, []);
+
   //const [book, setBook] = useState("");
   const BookBorrow = async (name) => {
     try {
       //setBook(name);
-      const token = localStorage.getItem("token");
+
+      console.log(token);
       await axios.post(
         `${API_BASE_URL}/Lib/user/borrow`,
         {
@@ -37,7 +49,7 @@ export default function SearchBar() {
       .then((res) => setResults(res.data || []))
       .catch((err) => console.error("Error fetching data:", err));
   };
-  
+
   return (
     <>
       <div className="searchPage">
@@ -88,7 +100,14 @@ export default function SearchBar() {
           </ul>
         </div>
       </div>
-      <Profile Refetch={fetchResults} availability={results.map(book => book.availability)}  />
+      {token !== null && (
+        <>
+          <Profile
+            Refetch={fetchResults}
+            availability={results.map((book) => book.availability)}
+          />
+        </>
+      )}
     </>
   );
 }
