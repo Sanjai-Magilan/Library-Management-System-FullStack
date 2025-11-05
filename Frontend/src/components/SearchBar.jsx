@@ -73,6 +73,7 @@ export default function SearchBar() {
                 <p>
                   <strong>Time:</strong> {new Date(book.time).toLocaleString()}
                 </p>
+                <div style={{ display: "flex", gap: "20px" }}>
                 <button
                   className="button_Style"
                   onClick={async () => {
@@ -82,6 +83,8 @@ export default function SearchBar() {
                 >
                   Borrow
                 </button>
+                <button  className="button_Style">Edit</button>
+                </div>
               </li>
             ))}
           </ul>
