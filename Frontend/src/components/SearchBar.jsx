@@ -1,7 +1,8 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./SearchBar.css";
 import Profile from "./Profile";
+import EditBook from "./EditBook";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function SearchBar() {
@@ -74,16 +75,21 @@ export default function SearchBar() {
                   <strong>Time:</strong> {new Date(book.time).toLocaleString()}
                 </p>
                 <div style={{ display: "flex", gap: "20px" }}>
-                <button
-                  className="button_Style"
-                  onClick={async () => {
-                    await BookBorrow(book.name);
-                    fetchResults();
-                  }}
-                >
-                  Borrow
-                </button>
-                <button  className="button_Style">Edit</button>
+                  <button
+                    className="button_Style"
+                    onClick={async () => {
+                      await BookBorrow(book.name);
+                      fetchResults();
+                    }}
+                  >
+                    Borrow
+                  </button>
+                  <button
+                    className="button_Style"
+                    onClick={<EditBook BookID={book.id} />}
+                  >
+                    Edit
+                  </button>
                 </div>
               </li>
             ))}
