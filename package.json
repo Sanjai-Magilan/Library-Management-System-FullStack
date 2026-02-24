@@ -4,10 +4,12 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.14"
   },
   "scripts": {
-  "dev": "concurrently \"nodemon Backend/src/server.js\" \"npm run --prefix Frontend dev\""
-}
-
+     "backend": "cd Backend && nodemon src/Server.js",
+     "frontend": "npm run --prefix Frontend dev",
+     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  }
 }
